@@ -1,22 +1,21 @@
 \section{Idiotenseite}
 
-\subsection{Spannungsteiler}
-\begin{minipage}{0.20\textwidth}
-	\includegraphics[width=\linewidth,keepaspectratio=true]{./Images/spannungsteiler}
-\end{minipage}%%% to prevent a space
-\begin{minipage}{0.30\textwidth}
-	\begin{align*}
-		\frac{U_2}{U} = \frac{R_2}{R_1 + R_2}
-	\end{align*}
-\end{minipage}
-
 \subsection{DGL}
 \begin{align*}
 	\text{Kondensator}: \qquad U = \frac{1}{s C}I \xrightarrow{\text{Homogen}}  -\frac{T_0}{V_{out}}I\\
-	\text{Induktion}: \qquad U = s L I \\
+	\text{Induktion}: \qquad U = s L I \xrightarrow{\text{Homogen}} U = \frac{L}{T_0}I\\
 \end{align*}
 
 \subsection{Energie}
-Die Energie der Spule 
-\[E_L = \frac{L}{2} {i_L}^2\]
-und des Kondensators \[E_c = \frac{C}{2}{V_c}^2\]
+Die Energie der Spule $E_L = \frac{L}{2} {i_L}^2$~\\
+For Energie des Kondensators $E_c = \frac{C}{2}{V_c}^2$
+
+\subsection{Kondensator Ladekurve}
+$U_0$ ist Start Spannung über dem Kondensator.
+\begin{align*}
+	U_{laden} &= U_0\cdot e^{-\frac{t}{RC}} \\
+	U_{entladen} &= U_0\cdot \left(1- e^{-\frac{t}{RC}}\right)
+\end{align*}
+\begin{center}
+	\includegraphics[width=0.5\columnwidth]{Images/kondi}
+\end{center}

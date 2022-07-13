@@ -28,30 +28,54 @@ Spannungsteiler $Div = \frac{R_2}{R_1 + R_2}$ mit Leistungsdichte $S$\\
 Dies ergibt eine Rauschspannungsdichte von $e = \sqrt{S_{Vout}}\frac{nV}{\sqrt{Hz}}$
 
 \subsubsection{Serie- und Parallelschaltung}
-Äquivalente Schaltung von Spannungsteiler. Ersatzwiderstand gesehen vom Ausgang $R_T = R_2 + R_1||R_3$
+Äquivalente Schaltung von Spannungsteiler. Quellenumwandlung und dann Ersatzwiderstand gesehen vom Ausgang $R_T = R_2 + R_1||R_3$
 \begin{center}
 	\includegraphics[width=0.6\columnwidth]{Images/rauschen_serie_parallel}
 \end{center}
 \[
 \overline{V_T^2} = 4kTR_TB = 4kT(R_2 + R_1||R_3)B
 \]
+Für C und L kann die $H(s)$ bestimmt werden und die Impedanz als einer der Widerstände $S_{Z\_Vout}$ verwendet werden.
 
+\subsection{Rausch-Bandbreite}
+Die 3dB-Bandbreite $f_c = \frac{1}{2\pi RC}$, damit kann die Rausch-Bandbreite $\frac{\pi}{2}\cdot f_c = \frac{1}{4RC}$ (Abhängig von der Filterordnung) bestimmt werden
+\begin{center}
+	\includegraphics[width=\columnwidth]{Images/rauschen_bandbreite}
+\end{center}
+
+\subsection{RC-Netzwerke}
+Kapazitäten und Induktivitäten rauschen nicht ändern aber die Bandbreite des Systems
+
+\begin{center}
+	\includegraphics[width=0.5\columnwidth]{Images/rc}
+\end{center}
+\begin{align*}
+e_{on} = \underbrace{\sqrt{4kTR}}_{e_{in}}\cdot \sqrt{\frac{kT}{C}}
+\end{align*}
+
+Der Widerstand trägt nicht direkt zur Rauschspannung bei, er limitiert aber die Bandbreite.
 
 \subsection{Opamp Rauschen}
 Die Rausch-Spannungsdichte $e_n$ oder auch $V_{noise}$ ist bei typischen Opamps $25\frac{nV}{\sqrt{Hz}}$.
 \begin{center}
 	\includegraphics[width=0.6\columnwidth]{Images/opamp_rauschen}
 \end{center}
-Die Ausgangs-Rauschspannung $E_0$ wird berechnet mittels \underline{Superposition.} Eine weitere wichtige Eigenschaft ist die \textbf{Rausch-Bandbreite} $ENB$. Sie wird berechnet mit der \textbf{Verstärkungs-Bandbreite-Produkt} $GBP$ und dem Verstärkungsfaktor $A$
+Die Ausgangs-Rauschspannung $E_0$ wird berechnet mittels \underline{Superposition.} Eine weitere wichtige Eigenschaft ist die \textbf{Rausch-Bandbreite} $ENB$ (Hz). Sie wird berechnet mit der \textbf{Verstärkungs-Bandbreite-Produkt} $GBP$ (Hz) und dem Verstärkungsfaktor $A = \frac{R_1 + R_3}{R_1}$
 \[
 ENB = \frac{GBP}{A}\frac{\pi}{2}
 \]
-Mittels der Spannungsdichte $E_{wnd}$ (aus Datenblatt) und $ENB$ kann der Effektivwert des weissen Rauschen berechnet werden $E_{op\_wn} = E_{wnd}\sqrt{ENB}$
+Mittels der Eingangs-Spannungsdichte $E_{wnd}$ (aus Datenblatt) und $ENB$ kann der Effektivwert des weissen Rauschen berechnet werden $E_{op\_wn} = E_{wnd}\sqrt{ENB}$ (in V). Am Augang ist somit $V_{noise_{op}} = E_{op\_wn} \cdot A$
 
-Wenn Bandbreite $>>$ Noise Corner Frequency ist, kann Pink-Noise vernachlässigt werden (gilt für Bandbreite $>10kHz$).
+Wenn Bandbreite $>>$ Noise Corner Frequency ist, kann Pink-Noise vernachlässigt werden (gilt für Bandbreite $>10kHz$) mit $e_w$ aus Opamp Datenblatt.
 \[
 V_{noise} = \sqrt{4kT\cdot R_2\cdot A\cdot ENB + e_{w}^2 \cdot A^2 \cdot ENB}
 \]
+
+Rauschanteil von R1 und R2 mit Opamp Verstärkung $A = \frac{R_1 + R_3}{R_1}$:
+\[
+S_{R1R2} = \left(\frac{R2}{R1}\right)^2\cdot 4kT \cdot R1 + 4kT \cdot R2 = 4kT \cdot R2\cdot A
+\]
+
 ~\\
 tl;tr: Grosse Widerstände bewirken grosse Rauschspannungen, reduzieren dafür Stromverbrauch. Optimal sind Widerstände die etwa gleich wie Opamp rauschen.
 
